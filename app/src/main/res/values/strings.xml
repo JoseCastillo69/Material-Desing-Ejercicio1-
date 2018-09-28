@@ -9,8 +9,15 @@
     <string name="limpiar">LIMPIAR</string>
     <string name="masculino">Masculino</string>
     <string name="femenino">Femenino</string>
+    <string name="seleccione_s">Seleccione un sexo</string>
+    <string name="error_cedula">Cedula NO VALIDA</string>
+    <string name="error_nombre">Nombre NO VALIDO</string>
+    <string name="error_apellido">Apellido NO VALIDO</string>
+    <string name="error_2">Por favor seleccione un sexo</string>
+    <string name="guardadoE">"Persona Guardada Exitosamente"</string>
 
     <string-array name="sexo">
+        <item>@string/seleccione_s</item>
         <item>@string/masculino</item>
         <item>@string/femenino</item>
     </string-array>

@@ -10,7 +10,7 @@ public class datos {
         listap.add(p);
     }
 
-    public ArrayList<Persona> obtener (){
+    public static ArrayList<Persona> obtener (){
         return listap;
     }
 

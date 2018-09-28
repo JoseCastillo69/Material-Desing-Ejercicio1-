@@ -31,7 +31,6 @@ public class AdaptadorP extends RecyclerView.Adapter<AdaptadorP.PersonaViewHolde
         holder.nombre.setText(p.getNombre());
         holder.apellido.setText(p.getApellido());
 
-
     }
 
     @Override
