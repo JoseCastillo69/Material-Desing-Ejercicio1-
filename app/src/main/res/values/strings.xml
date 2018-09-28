@@ -1,4 +1,20 @@
 <resources>
     <string name="app_name">PersonasMaterial</string>
     <string name="action_settings">Settings</string>
+    <string name="titulo_agregar">AGREGAR PERSONA</string>
+    <string name="cedula">Cedula</string>
+    <string name="nombre">Nombre</string>
+    <string name="apellido">Apellido</string>
+    <string name="guardar">GUARDAR</string>
+    <string name="limpiar">LIMPIAR</string>
+    <string name="masculino">Masculino</string>
+    <string name="femenino">Femenino</string>
+
+    <string-array name="sexo">
+        <item>@string/masculino</item>
+        <item>@string/femenino</item>
+    </string-array>
+
+
+
 </resources>
