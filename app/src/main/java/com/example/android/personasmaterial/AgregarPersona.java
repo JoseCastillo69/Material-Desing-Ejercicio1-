@@ -101,6 +101,7 @@ public class AgregarPersona extends Activity {
         txtApellido.setText("");
         cmbSexo.setSelection(0);
         txtCedula.requestFocus();
+        foto.setImageResource(android.R.drawable.ic_menu_gallery);
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
     }
