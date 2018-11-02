@@ -26,7 +26,7 @@ public class AdaptadorP extends RecyclerView.Adapter<AdaptadorP.PersonaViewHolde
     @Override
     public void onBindViewHolder(PersonaViewHolder holder, int position) {
         Persona p = personas.get(position);
-        holder.foto.setImageResource(p.getFoto());
+        //holder.foto.setImageResource(p.getFoto());
         holder.cedula.setText(p.getCedula());
         holder.nombre.setText(p.getNombre());
         holder.apellido.setText(p.getApellido());

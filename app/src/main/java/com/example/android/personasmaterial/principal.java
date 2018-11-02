@@ -12,6 +12,12 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
 
 public class principal extends AppCompatActivity {
@@ -20,6 +26,9 @@ public class principal extends AppCompatActivity {
     private RecyclerView lstP;
     private ArrayList<Persona> personas;
     private LinearLayoutManager llm;
+    private DatabaseReference databaseReference;
+    private String db = "Personas";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,15 +37,38 @@ public class principal extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        lstP= findViewById(R.id.lstPersonas);
-        personas = datos.obtener();
+        lstP= findViewById(R.id.lstActividades);
+        personas = new ArrayList<>();
 
-        AdaptadorP adaptP = new AdaptadorP(personas);
+        final AdaptadorP adaptP = new AdaptadorP(personas);
 
         llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         lstP.setLayoutManager(llm);
         lstP.setAdapter(adaptP);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        databaseReference.child(db).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                personas.clear();
+                if(dataSnapshot.exists()){
+                    for(DataSnapshot snapshot :dataSnapshot.getChildren()){
+                        Persona p = snapshot.getValue(Persona.class);
+                        personas.add(p);
+                    }
+                }
+                adaptP.notifyDataSetChanged();
+                datos.setPersonas(personas);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     public void agregarPersona(View v){
@@ -44,4 +76,5 @@ public class principal extends AppCompatActivity {
         startActivity(i);
         finish();
     }
+
 }

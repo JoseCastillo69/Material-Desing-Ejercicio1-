@@ -3,6 +3,7 @@ package com.example.android.personasmaterial;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.view.View;
@@ -13,6 +14,12 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -20,10 +27,12 @@ public class AgregarPersona extends Activity {
 
     private EditText txtCedula, txtNombre, txtApellido;
     private Spinner cmbSexo;
+    private ArrayAdapter<String> adapter;
     private String opc[];
     private ArrayList<Integer> fotos;
     private ImageView foto;
-    private ArrayAdapter<String> adapter;
+    private Uri uri;
+    private StorageReference storageReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +43,7 @@ public class AgregarPersona extends Activity {
         txtNombre = findViewById(R.id.txtNombre);
         txtApellido = findViewById(R.id.txtApellido);
         cmbSexo = findViewById(R.id.cmbSexo);
-        foto = findViewById(R.id.foto);
+        foto = findViewById(R.id.fotoe);
         fotos = new ArrayList<>();
         fotos.add(R.drawable.images);
         fotos.add(R.drawable.images2);
@@ -43,6 +52,8 @@ public class AgregarPersona extends Activity {
         opc = getResources().getStringArray(R.array.sexo);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, opc);
         cmbSexo.setAdapter(adapter);
+
+        storageReference = FirebaseStorage.getInstance().getReference();
     }
 
     public int fotoAleatoria(){
@@ -53,17 +64,20 @@ public class AgregarPersona extends Activity {
     }
 
     public void guardar(View v){
-        String cedula, nombre, apellido;
-        int foto, sexo;
-        foto = this.fotoAleatoria();
+        String cedula, nombre, apellido, foto, id;
+        int sexo;
+        //foto = this.fotoAleatoria();
         if (validar()){
+            id = datos.getId();
+            foto = id+".jpg";
             cedula = txtCedula.getText().toString();
             nombre = txtNombre.getText().toString();
             apellido = txtApellido.getText().toString();
             sexo = cmbSexo.getSelectedItemPosition();
 
-            Persona p = new Persona(foto, cedula, nombre, apellido, sexo);
+            Persona p = new Persona(id, foto, cedula, nombre, apellido, sexo);
             p.NuevaP();
+            Subir_Foto(foto);
 
             Snackbar.make(v, getResources().getString(R.string.guardadoE), Snackbar.LENGTH_SHORT).show();
 
@@ -121,4 +135,28 @@ public class AgregarPersona extends Activity {
         return true;
 
     }
+
+    public void seleccionar_foto(View v){
+        Intent i = new Intent();
+        i.setType("image/*");
+        i.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(i,
+                "Seleccionar Foto"),1);
+    }
+
+    protected void onActivityResult (int i, int o, Intent data){
+        super.onActivityResult(i, o, data);
+        if (i == 1){
+            uri = data.getData();
+            if (uri != null){
+                foto.setImageURI(uri);
+            }
+        }
+    }
+
+    private void Subir_Foto(String foto){
+        StorageReference child = storageReference.child(foto);
+        UploadTask uploadTask =child.putFile(uri);
+    }
+
 }
