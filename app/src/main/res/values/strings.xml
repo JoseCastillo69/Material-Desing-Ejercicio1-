@@ -17,6 +17,10 @@
     <string name="error_f">Por favor seleccione una foto</string>
     <string name="guardadoE">"Persona Guardada Exitosamente"</string>
     <string name="datos">Datos Personales</string>
+    <string name="si">SI</string>
+    <string name="no">NO</string>
+    <string name="titulo_eliminar">Eliminar</string>
+    <string name="mensaje_eliminar">¿Esta seguro que desea ELIMINAR esta persona?</string>
 
     <string-array name="sexo">
         <item>@string/seleccione_s</item>

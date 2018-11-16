@@ -1,6 +1,8 @@
 package com.example.android.personasmaterial;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -54,6 +56,34 @@ public class DetallePersona extends Activity {
     }
 
     public void Eliminar (View v){
+        String positivo, negativo;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(getResources().getString(R.string.titulo_eliminar));
+        builder.setMessage(getResources().getString(R.string.mensaje_eliminar));
+        builder.setMessage(getResources().getString(R.string.mensaje_eliminar));
+        positivo = getResources().getString(R.string.si);
+        negativo= getResources().getString(R.string.no);
+
+        builder.setPositiveButton(positivo, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Persona p = new Persona();
+                p.setId(id);
+                p.EliminarP();
+                onBackPressed();
+            }
+        });
+
+        builder.setNegativeButton(negativo, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+
+        AlertDialog dialog= builder.create();
+        dialog.show();
+
         Persona p = new Persona();
         p.setId(id);
         p.EliminarP();
