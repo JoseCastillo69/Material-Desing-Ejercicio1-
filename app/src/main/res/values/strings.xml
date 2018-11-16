@@ -15,6 +15,7 @@
     <string name="error_apellido">Apellido NO VALIDO</string>
     <string name="error_2">Por favor seleccione un sexo</string>
     <string name="guardadoE">"Persona Guardada Exitosamente"</string>
+    <string name="datos">Datos Personales</string>
 
     <string-array name="sexo">
         <item>@string/seleccione_s</item>
