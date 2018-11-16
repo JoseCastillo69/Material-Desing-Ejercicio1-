@@ -29,4 +29,12 @@ public class datos {
         return listap;
     }
 
+    public static void eliminar (Persona p){
+        databaseReference.child(db).child(p.getId()).removeValue();
+    }
+
+    public static void editar (Persona p){
+        databaseReference.child(db).child(p.getId()).setValue(p);
+    }
+
 }

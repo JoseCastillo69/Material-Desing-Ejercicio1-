@@ -73,4 +73,12 @@ public class Persona {
     public void NuevaP(){
         datos.agregar(this);
     }
+
+    public void EliminarP(){
+        datos.eliminar(this);
+    }
+
+    public void EditarP(){
+        datos.editar(this);
+    }
 }

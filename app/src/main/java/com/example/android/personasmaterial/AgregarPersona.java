@@ -128,8 +128,13 @@ public class AgregarPersona extends Activity {
         }
 
         if (o1 == 0) {
-            Toast.makeText(this, getResources().getString(R.string.error_2), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.error_sexo), Toast.LENGTH_SHORT).show();
             cmbSexo.requestFocus();
+            return false;
+        }
+        if (foto==null){
+            Toast.makeText(this, getResources().getString(R.string.error_f), Toast.LENGTH_SHORT).show();
+            foto.requestFocus();
             return false;
         }
 
